@@ -15,10 +15,7 @@ def main():
         columns=['DESCRIPTION']
     )
 
-    tf_idf(
-        token_df,
-        threshold=0.1
-    )
+    tf_idf(token_df)
 
 
 if __name__ == '__main__':
