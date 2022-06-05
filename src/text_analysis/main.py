@@ -1,5 +1,3 @@
-import pandas as pd
-
 from sentenceid import create_tokens
 from comparison import tf_idf
 
