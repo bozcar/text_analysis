@@ -1,11 +1,11 @@
 import pandas as pd
 
-import comparison
 from sentenceid import create_tokens
+from comparison import tf_idf
 
 
 def main():
-    TEXT_PATH = "./texts/"
+    TEXT_PATH = "./texts/" # The directory where the texts are saved
 
     tokens = create_tokens(TEXT_PATH)
 
@@ -15,7 +15,10 @@ def main():
         columns=['DESCRIPTION']
     )
 
-    print(token_df)
+    tf_idf(
+        token_df,
+        threshold=0.1
+    )
 
 
 if __name__ == '__main__':

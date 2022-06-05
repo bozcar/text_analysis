@@ -7,18 +7,14 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-def tf_idf(index_sentance_data):
+def tf_idf(df, threshold=0.4):
 
     output = defaultdict(list)
-
-    df = pd.DataFrame(columns=["ID","DESCRIPTION"], data=np.matrix(index_sentance_data))
 
     corpus = list(df["DESCRIPTION"].values)
 
     vectorizer = TfidfVectorizer()
     X = vectorizer.fit_transform(corpus)
-
-    threshold = 0.4
 
     # This is inefficient, it will do everything twice
     for x in range(0,X.shape[0]):
@@ -27,8 +23,8 @@ def tf_idf(index_sentance_data):
                 similarity = cosine_similarity(X[x],X[y])
                 if(similarity>threshold):
                     output[x].append((y, similarity))
-                    print(df["ID"][x],":",corpus[x])
-                    print(df["ID"][y],":",corpus[y])
-                    print("Cosine similarity:",similarity)
+                    print(f"{x}: {corpus[x]}")
+                    print(f"{y}: {corpus[y]}")
+                    print(f"Cosine similarity: {similarity}")
                     print()
     return output
