@@ -12,10 +12,10 @@ def tf_idf(df: pd.DataFrame, threshold=0.4):
     X = vectorizer.fit_transform(corpus)
 
     output = defaultdict(list)
-    for x in range(0,X.shape[0]):
-        for y in range(x,X.shape[0]):
+    for x in range(0, X.shape[0]):
+        for y in range(x, X.shape[0]):
             if(x!=y):
-                similarity = cosine_similarity(X[x],X[y])
+                similarity = cosine_similarity(X[x], X[y])
 
                 if(similarity>threshold):
                     output[x].append((y, similarity))
@@ -29,4 +29,5 @@ def tf_idf(df: pd.DataFrame, threshold=0.4):
                     print(f"    {y}: {y_sen}\n    from: {y_title}\n")
 
                     print(f"    Cosine similarity: {similarity[0][0]:.3f}\n\n")
+
     return output
