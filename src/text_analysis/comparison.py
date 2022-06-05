@@ -16,12 +16,17 @@ def tf_idf(df: pd.DataFrame, threshold=0.4):
         for y in range(x,X.shape[0]):
             if(x!=y):
                 similarity = cosine_similarity(X[x],X[y])
-                
+
                 if(similarity>threshold):
                     output[x].append((y, similarity))
-                    print(f"{x}: {corpus[x]}")
-                    print(f"{y}: {corpus[y]}")
-                    print(f"Cosine similarity: {similarity}")
-                    print()
 
+                    x_sen, y_sen = df.loc[x, "DESCRIPTION"], df.loc[y, "DESCRIPTION"]
+                    x_title, y_title = df.loc[x, "TITLE"], df.loc[y, "TITLE"]
+
+                    print("Match found:\n")
+
+                    print(f"    {x}: {x_sen}\n    from: {x_title}\n")
+                    print(f"    {y}: {y_sen}\n    from: {y_title}\n")
+
+                    print(f"    Cosine similarity: {similarity[0][0]:.3f}\n\n")
     return output

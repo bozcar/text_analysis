@@ -9,13 +9,10 @@ def main():
 
     tokens = create_tokens(TEXT_PATH)
 
-    token_df = pd.DataFrame.from_dict(
-        tokens,
-        orient='index',
-        columns=['DESCRIPTION']
+    tf_idf(
+        tokens, 
+        threshold=0.4
     )
-
-    tf_idf(token_df)
 
 
 if __name__ == '__main__':
